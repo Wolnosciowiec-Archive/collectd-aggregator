@@ -12,13 +12,19 @@ Then this aggregator instance should send the data to InfluxDB or other database
 
 ## Setup
 
-1. Environment variables
+1. Set environment variables
 
 ```bash
 # address where to pass the data eg. InfluxDB instance
 FORWARD_ADDRESS=1.2.3.4 
 FORWARD_PORT=25826
 ```
+
+2. Mount `/etc/collectd/auth_file` file with credentials
+
+https://collectd.org/wiki/index.php/Networking_introduction#Cryptographic_setup
+
+3. Run!
 
 Copyleft
 --------
