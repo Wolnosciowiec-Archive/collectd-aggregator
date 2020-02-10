@@ -9,9 +9,10 @@ before_script:
 
 jobs:
   include:
-    - stage: Build
+    - stage: Test build
+      if: tag IS not present
       script: make build TAG=dev
 
-    - stage: Publish
+    - stage: Release
       if: tag IS present
       script: make build publish TAG=$TRAVIS_TAG
