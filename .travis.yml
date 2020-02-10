@@ -13,5 +13,5 @@ jobs:
       script: make build TAG=dev
 
     - stage: Publish
-      if: $TRAVIS_TAG =~ ^v[0-9\.a-z\-]+
+      if: tag IS present
       script: make build publish TAG=$TRAVIS_TAG
