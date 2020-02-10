@@ -8,6 +8,6 @@ LoadPlugin network
         AuthFile "/etc/collectd/auth_file"
     </Listen>
 
-    Server "{{ FORWARD_ADDRESS }}"
+    Server "{{ FORWARD_ADDRESS }}" ""{{ FORWARD_PORT }}"
     Forward true
 </Plugin>

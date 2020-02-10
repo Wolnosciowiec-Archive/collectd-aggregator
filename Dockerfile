@@ -15,7 +15,8 @@ LABEL org.opencontainers.image.created="$BUILD_DATE" \
       org.opencontainers.image.authors="RiotKit technical collective" \
       org.riotkit.filerepository.version="$VERSION"
 
-ENV FORWARD_ADDRESS="influxdb"
+ENV FORWARD_ADDRESS="influxdb" \
+    FORWARD_PORT="25826"
 
 COPY container-files/bin/* /bin/
 COPY container-files/etc/collectd/* /etc/collectd/
