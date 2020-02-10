@@ -1,0 +1,13 @@
+FQDNLookup   false
+
+LoadPlugin network
+
+<Plugin "network">
+    <Listen "0.0.0.0">
+        SecurityLevel "Encrypt"
+        AuthFile "/etc/collectd/auth_file"
+    </Listen>
+
+    Server "{{ FORWARD_ADDRESS }}"
+    Forward true
+</Plugin>

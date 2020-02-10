@@ -1,0 +1,16 @@
+language: python
+if: branch = master or tag IS present
+os: linux
+services: docker
+
+before_script:
+  - echo "$QUAY_PASSWORD" | sudo docker login -u "$QUAY_USERNAME" --password-stdin quay.io
+
+jobs:
+  include:
+    - stage: Build
+      script: make build TAG=dev
+
+    - stage: Publish
+      condition: $TRAVIS_TAG =~ ^v[0-9\.a-z\-]+
+      script: make build publish TAG=$TRAVIS_TAG
