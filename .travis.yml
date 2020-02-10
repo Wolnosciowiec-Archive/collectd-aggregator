@@ -15,4 +15,4 @@ jobs:
 
     - stage: Release
       if: tag IS present
-      script: make build publish TAG=$TRAVIS_TAG
+      script: make build push TAG=$TRAVIS_TAG
