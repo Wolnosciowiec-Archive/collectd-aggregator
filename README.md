@@ -1,8 +1,34 @@
 # collectd-aggregator
 
-Collectd server that aggregates results of other collectd instances and passes to InfluxDB
+Collectd server that aggregates results of other collectd instances and passes to InfluxDB or other database that supports collectd.
 
 ![collectd](./docs/diagram.png)
+
+
+```bash
+docker pull quay.io/riotkit/collectd-aggregator:v1.1
+```
+
+```yaml
+version: '2.4'
+
+services:
+    collectd_aggregator:
+        image: quay.io/riotkit/collectd-aggregator:v1.1
+        volumes:
+            - ./auth_file:/etc/collectd/auth_file:ro
+        environment:
+            FORWARD_ADDRESS: influxdb
+            FORWARD_PORT: 25826
+    
+            # optional
+            FORWARD_USER: 'riotkit'
+            FORWARD_PASSWORD: 'we-all-work-on-our-wealthy-masters'
+        ports:
+            - 25826:25826/udp
+```
+
+**Available versions:** https://quay.io/repository/riotkit/collectd-aggregator?tab=tags
 
 ## Architecture
 
@@ -21,6 +47,13 @@ FORWARD_PORT=25826
 ```
 
 2. Mount `/etc/collectd/auth_file` file with credentials
+
+Example:
+```
+user:passwd
+iwa:workers_united_cannot_be_defeated
+
+```
 
 https://collectd.org/wiki/index.php/Networking_introduction#Cryptographic_setup
 
