@@ -32,6 +32,19 @@ services:
 
 **Available versions:** https://quay.io/repository/riotkit/collectd-aggregator?tab=tags
 
+## Hints on InfluxDB configuration
+
+This is a minimum configuration for InfluxDB, so it could take the data from the aggregator:
+
+```ini
+[[collectd]]
+  enabled = true
+  bind-address = ":25826"
+  database = "collectd"
+```
+
+In internal docker network possibly you do not need authorization between Collectd and InfluxDB if InfluxDB is not exposing the ports to the host.
+
 ## Architecture
 
 Works as an aggregator of other collectd instances data.
