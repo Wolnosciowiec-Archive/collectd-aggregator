@@ -1,6 +1,8 @@
 # collectd-aggregator
 
-Collectd server that aggregates results of other collectd instances and passes to InfluxDB or other database that supports collectd.
+Collectd server that **aggregates** results of other collectd instances and passes to InfluxDB or other database that supports collectd.
+
+The aggregator is filled-in with red color on diagram below.
 
 ![collectd](./docs/diagram.png)
 
