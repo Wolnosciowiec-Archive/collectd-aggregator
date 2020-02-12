@@ -59,6 +59,10 @@ Then this aggregator instance should send the data to InfluxDB or other database
 # address where to pass the data eg. InfluxDB instance
 FORWARD_ADDRESS=1.2.3.4 
 FORWARD_PORT=25826
+
+# optional
+FORWARD_USER=riotkit
+FORWARD_PASSWORD=we-all-work-on-our-wealthy-masters
 ```
 
 2. Mount `/etc/collectd/auth_file` file with credentials
