@@ -16,18 +16,22 @@ LABEL org.opencontainers.image.created="$BUILD_DATE" \
       org.riotkit.filerepository.version="$VERSION"
 
 ENV FORWARD_ADDRESS="influxdb" \
-    FORWARD_PORT="25826"
+    FORWARD_PORT="25826" \
+    FORWARD_USER= \
+    FORWARD_PASSWORD=
 
 COPY container-files/bin/* /bin/
 COPY container-files/etc/collectd/* /etc/collectd/
+COPY container-files/etc/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
 
 RUN pip install --no-cache-dir j2cli \
-    && apk add --update collectd collectd-network bash \
+    && apk add --update collectd collectd-network bash rsyslog supervisor \
     && chmod +x /bin/entrypoint.sh
 
 RUN addgroup -g 1000 -S riotkit \
     && adduser -u 1000 -S riotkit -G riotkit \
-    && chown riotkit:riotkit -R /etc/collectd/
+    && chown riotkit:riotkit -R /etc/collectd/ \
+    && mkdir -p /var/log/supervisor/
 
-USER riotkit
+USER root
 ENTRYPOINT ["/bin/entrypoint.sh"]

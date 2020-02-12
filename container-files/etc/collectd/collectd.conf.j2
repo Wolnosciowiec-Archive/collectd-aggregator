@@ -1,13 +1,26 @@
 FQDNLookup   false
 
 LoadPlugin network
+LoadPlugin cpu
+LoadPlugin syslog
+
+<Plugin syslog>
+        LogLevel info
+</Plugin>
 
 <Plugin "network">
-    <Listen "0.0.0.0">
-        SecurityLevel "Encrypt"
+    <Listen "0.0.0.0" "25826">
+        SecurityLevel "Sign"
         AuthFile "/etc/collectd/auth_file"
     </Listen>
 
-    Server "{{ FORWARD_ADDRESS }}" ""{{ FORWARD_PORT }}"
+    <Server "{{ FORWARD_ADDRESS }}" "{{ FORWARD_PORT }}">
+        {% if FORWARD_USER and FORWARD_PASSWORD %}
+        Username "{{ FORWARD_USER }}"
+        Password "{{ FORWARD_PASSWORD }}"
+        {% endif %}
+    </Server>
+
     Forward true
 </Plugin>
+
